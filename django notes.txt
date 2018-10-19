@@ -1,0 +1,63 @@
+Django
+
+1. 创建项目和api
+django-admin startproject django_restful
+
+cd django_restful
+
+python manage.py startapp api 
+
+打开django_restful目录下的settings.py,在INSTALLED_APPS里添加 api 和rest_framework 
+
+
+2. rest_framework权限
+
+打开
+http://www.django-rest-framework.org/api-guide/permissions/
+
+复制
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+表示将权限的范围设置在全局范围内
+
+添加到 django_restful目录下的settings.py 最下面
+
+
+
+3. 数据库迁移
+python manage.py migrate
+出现applying的提示表示开始迁移了
+
+
+4. 创建超级管理员账户
+python manage.py createsuperuser
+按提示输入用户名，邮箱，密码
+
+
+5. 启动server
+python manage.py runserver 
+出现
+Starting development server at http://127.0.0.1:8000/
+表示启动成功
+PS:可以自定义host和port
+python manage.py 127.0.0.1:8001
+
+
+6. 修改django用户的密码
+cd到django目录
+python manage.py shell
+
+from django.contrib.auth.models import User
+u = User.objects.get(username__exact='daniel')
+u.set_password('12345678')
+u.save()
+
+
+
+from django.contrib.auth.models import User
+user = User.object.get(pk=1)
+user
+
